@@ -1,0 +1,957 @@
+{
+    "title": "dev(python/chattermark): convert chat GPT sessions to markdown",
+    "create_time": 1681444192.748429,
+    "update_time": 1681446704.0,
+    "mapping": {
+        "28a3517d-fbf6-459d-af6b-8617b71c8aaf": {
+            "id": "28a3517d-fbf6-459d-af6b-8617b71c8aaf",
+            "message": {
+                "id": "28a3517d-fbf6-459d-af6b-8617b71c8aaf",
+                "author": {
+                    "role": "system",
+                    "metadata": {}
+                },
+                "create_time": 1681444192.748429,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        ""
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {},
+                "recipient": "all"
+            },
+            "parent": "8e1435cd-b576-471e-afd3-1229d781c0a6",
+            "children": [
+                "6008fe47-57f5-4288-b9cd-af43e21ff44b",
+                "91cbef32-4d36-48e8-95ab-a839c0d6e367"
+            ]
+        },
+        "8e1435cd-b576-471e-afd3-1229d781c0a6": {
+            "id": "8e1435cd-b576-471e-afd3-1229d781c0a6",
+            "children": [
+                "28a3517d-fbf6-459d-af6b-8617b71c8aaf"
+            ]
+        },
+        "6008fe47-57f5-4288-b9cd-af43e21ff44b": {
+            "id": "6008fe47-57f5-4288-b9cd-af43e21ff44b",
+            "message": {
+                "id": "6008fe47-57f5-4288-b9cd-af43e21ff44b",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444192.751102,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please define a pedantic model for a json representation of a chat GPT session as extracted from a Chrome browser session using the developer tools."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "28a3517d-fbf6-459d-af6b-8617b71c8aaf",
+            "children": [
+                "2c0db448-a2d2-4abf-b3e2-2c151c1d7764"
+            ]
+        },
+        "2c0db448-a2d2-4abf-b3e2-2c151c1d7764": {
+            "id": "2c0db448-a2d2-4abf-b3e2-2c151c1d7764",
+            "message": {
+                "id": "2c0db448-a2d2-4abf-b3e2-2c151c1d7764",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444204.048202,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "A pedantic model for a JSON representation of a Chat GPT session extracted from a Chrome browser session using the developer tools would include detailed structure, naming conventions, and data types. Here's an example of a JSON schema that defines this pedantic model:\n\n```json\n{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"ChatGPTSession\",\n  \"description\": \"A JSON representation"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "6008fe47-57f5-4288-b9cd-af43e21ff44b",
+            "children": []
+        },
+        "91cbef32-4d36-48e8-95ab-a839c0d6e367": {
+            "id": "91cbef32-4d36-48e8-95ab-a839c0d6e367",
+            "message": {
+                "id": "91cbef32-4d36-48e8-95ab-a839c0d6e367",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444252.398385,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please define a pydantic model for a json representation of a chat GPT session as extracted from a Chrome browser session using the developer tools."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "28a3517d-fbf6-459d-af6b-8617b71c8aaf",
+            "children": [
+                "34a64823-b94a-49c1-a486-102b488c014b"
+            ]
+        },
+        "34a64823-b94a-49c1-a486-102b488c014b": {
+            "id": "34a64823-b94a-49c1-a486-102b488c014b",
+            "message": {
+                "id": "34a64823-b94a-49c1-a486-102b488c014b",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444313.495389,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To create a Pydantic model for a JSON representation of a chat GPT session extracted from a Chrome browser session using the developer tools, you'll first need to identify the data structure and fields in the JSON. I'll assume a basic structure with user and AI messages, along with their timestamps. You may need to adjust the fields according to the actual JSON structure you have.\n\nFirst, install Pydantic by running:\n\n```\npip install pydantic\n```\n\nThen, create a Python file (e.g., `gpt_chat_model.py`) and define the Pydantic models as follows:\n\n```python\nfrom datetime import datetime\nfrom typing import List\nfrom pydantic import BaseModel\n\nclass Message(BaseModel):\n    sender: str\n    content: str\n    timestamp: datetime\n\nclass GPTChatSession(BaseModel):\n    session_id: str\n    messages: List[Message]\n\n    class Config:\n        extra = \"ignore\"  # To ignore any extra fields in the JSON that are not in the Pydantic model\n```\n\nIn this example, we define a `Message` model that has `sender`, `content`, and `timestamp` fields, and a `GPTChatSession` model that has `session_id` and a list of `Message` objects as `messages`.\n\nYou can now use this model to parse the JSON data extracted from the Chrome browser session:\n\n```python\nfrom gpt_chat_model import GPTChatSession\nimport json\n\n# Replace this with the actual JSON string extracted from the Chrome browser session\njson_data = '''\n{\n    \"session_id\": \"some_unique_id\",\n    \"messages\": [\n        {\"sender\": \"user\", \"content\": \"Hello, GPT!\", \"timestamp\": \"2023-04-13T15:32:10.123Z\"},\n        {\"sender\": \"assistant\", \"content\": \"Hello! How can I help you?\", \"timestamp\": \"2023-04-13T15:32:12.456Z\"}\n    ]\n}\n'''\n\n# Deserialize the JSON string to a GPTChatSession instance\ngpt_chat_session = GPTChatSession.parse_raw(json_data)\n\nprint(gpt_chat_session)\n```\n\nRemember to replace `json_data` with the actual JSON string extracted from the browser session. The `GPTChatSession` instance will now contain the parsed data, which can be accessed and manipulated as needed."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "91cbef32-4d36-48e8-95ab-a839c0d6e367",
+            "children": [
+                "202972c5-4095-4c69-a710-59225cf2dcb0"
+            ]
+        },
+        "202972c5-4095-4c69-a710-59225cf2dcb0": {
+            "id": "202972c5-4095-4c69-a710-59225cf2dcb0",
+            "message": {
+                "id": "202972c5-4095-4c69-a710-59225cf2dcb0",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444471.959142,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write a python function using black and eyesort formatting to convert a GPTChatSession instance to a markdown representation where messages are displayed in chronological order, and GPT responses are formatted using markdown block quote syntax."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "34a64823-b94a-49c1-a486-102b488c014b",
+            "children": [
+                "5ad963b4-e761-4c22-8d18-7d36c17bb169"
+            ]
+        },
+        "5ad963b4-e761-4c22-8d18-7d36c17bb169": {
+            "id": "5ad963b4-e761-4c22-8d18-7d36c17bb169",
+            "message": {
+                "id": "5ad963b4-e761-4c22-8d18-7d36c17bb169",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444521.092722,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To create a function that converts a GPTChatSession instance to a Markdown representation with black and isort formatting, first install the required packages:\n\n```bash\npip install black isort\n```\n\nThen, create a Python file (e.g., `gpt_chat_to_md.py`) and apply the following code:\n\n```python\n# gpt_chat_to_md.py\nfrom gpt_chat_model import GPTChatSession\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n\n    for message in chat_session.messages:\n        if message.sender == \"assistant\":\n            md_output.append(f\"> {message.content}\\n\")\n        else:\n            md_output.append(f\"{message.sender}: {message.content}\\n\")\n\n    return \"\".join(md_output)\n\n\nif __name__ == \"__main__\":\n    # Example usage\n    from gpt_chat_model import Message\n    from datetime import datetime\n\n    messages = [\n        Message(\n            sender=\"user\",\n            content=\"Hello, GPT!\",\n            timestamp=datetime.fromisoformat(\"2023-04-13T15:32:10.123Z\"),\n        ),\n        Message(\n            sender=\"assistant\",\n            content=\"Hello! How can I help you?\",\n            timestamp=datetime.fromisoformat(\"2023-04-13T15:32:12.456Z\"),\n        ),\n    ]\n\n    gpt_chat_session = GPTChatSession(session_id=\"some_unique_id\", messages=messages)\n    markdown_output = gpt_chat_session_to_md(gpt_chat_session)\n    print(markdown_output)\n```\n\nNow, format the code using black and isort:\n\n```bash\nblack gpt_chat_to_md.py\nisort gpt_chat_to_md.py\n```\n\nThe function `gpt_chat_session_to_md` takes a GPTChatSession instance and converts it to a Markdown representation. In the Markdown output, messages from the assistant are formatted using the block quote syntax.\n\nHere is an example of the output:\n\n```\nuser: Hello, GPT!\n> Hello! How can I help you?\n```"
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "202972c5-4095-4c69-a710-59225cf2dcb0",
+            "children": [
+                "5748fb72-e31a-45e6-a387-d7fef6ba2124"
+            ]
+        },
+        "5748fb72-e31a-45e6-a387-d7fef6ba2124": {
+            "id": "5748fb72-e31a-45e6-a387-d7fef6ba2124",
+            "message": {
+                "id": "5748fb72-e31a-45e6-a387-d7fef6ba2124",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444576.701121,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write a typer CLI app to make this function callable from the command line. Configure typer to use a rich logging handler"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "5ad963b4-e761-4c22-8d18-7d36c17bb169",
+            "children": [
+                "ef549ae4-07fa-44bf-840d-ac536d6d5a37"
+            ]
+        },
+        "ef549ae4-07fa-44bf-840d-ac536d6d5a37": {
+            "id": "ef549ae4-07fa-44bf-840d-ac536d6d5a37",
+            "message": {
+                "id": "ef549ae4-07fa-44bf-840d-ac536d6d5a37",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444653.005529,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To create a Typer CLI app for the `gpt_chat_session_to_md` function and use Rich logging, first install the required packages:\n\n```bash\npip install typer rich\n```\n\nNow, create a Python file (e.g., `gpt_chat_cli.py`) and apply the following code:\n\n```python\n# gpt_chat_cli.py\nimport json\nimport sys\nfrom pathlib import Path\n\nimport typer\nfrom rich.logging import RichHandler\nfrom rich.traceback import install\n\nfrom gpt_chat_model import GPTChatSession\nfrom gpt_chat_to_md import gpt_chat_session_to_md\n\ninstall()\napp = typer.Typer()\n\n@app.command()\ndef convert(\n    input_json: Path = typer.Argument(..., help=\"Path to the input JSON file\"),\n    output_md: Path = typer.Argument(..., help=\"Path to the output Markdown file\"),\n):\n    \"\"\"Convert a GPTChatSession JSON file to a Markdown representation.\"\"\"\n    # Configure the Rich logging handler\n    import logging\n\n    logging.basicConfig(\n        level=logging.INFO,\n        format=\"%(message)s\",\n        datefmt=\"[%X]\",\n        handlers=[RichHandler(rich_tracebacks=True)],\n    )\n    log = logging.getLogger(\"rich\")\n\n    # Read input JSON file\n    try:\n        with input_json.open() as f:\n            chat_session_json = json.load(f)\n    except Exception as e:\n        log.error(f\"Error reading input file: {e}\")\n        sys.exit(1)\n\n    # Parse JSON to GPTChatSession instance\n    try:\n        chat_session = GPTChatSession.parse_obj(chat_session_json)\n    except Exception as e:\n        log.error(f\"Error parsing GPTChatSession: {e}\")\n        sys.exit(1)\n\n    # Convert GPTChatSession to Markdown\n    markdown_output = gpt_chat_session_to_md(chat_session)\n\n    # Write Markdown output to file\n    try:\n        with output_md.open(\"w\") as f:\n            f.write(markdown_output)\n        log.info(f\"Converted chat session saved to: {output_md}\")\n    except Exception as e:\n        log.error(f\"Error writing output file: {e}\")\n        sys.exit(1)\n\n\nif __name__ == \"__main__\":\n    app()\n```\n\nFormat the code using black and isort:\n\n```bash\nblack gpt_chat_cli.py\nisort gpt_chat_cli.py\n```\n\nThis Typer CLI app takes two command line arguments: the input JSON file and the output Markdown file. It reads the JSON file, converts it to a GPTChatSession instance, and then converts the chat session to a Markdown representation using the `gpt_chat_session_to_md` function. Finally, it saves the Markdown output to the specified file.\n\nTo run the CLI app, execute the following command, replacing `input.json` and `output.md` with the appropriate file paths:\n\n```bash\npython gpt_chat_cli.py input.json output.md\n```\n\nThe CLI app will provide a log output using the Rich logging handler."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "5748fb72-e31a-45e6-a387-d7fef6ba2124",
+            "children": [
+                "2b99c154-4a6a-4db1-88ff-548abbf84108"
+            ]
+        },
+        "2b99c154-4a6a-4db1-88ff-548abbf84108": {
+            "id": "2b99c154-4a6a-4db1-88ff-548abbf84108",
+            "message": {
+                "id": "2b99c154-4a6a-4db1-88ff-548abbf84108",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444673.089885,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please suggest 20 good names for this app"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ef549ae4-07fa-44bf-840d-ac536d6d5a37",
+            "children": [
+                "b7b9887b-3133-4dc9-847a-9bf177a494fe"
+            ]
+        },
+        "b7b9887b-3133-4dc9-847a-9bf177a494fe": {
+            "id": "b7b9887b-3133-4dc9-847a-9bf177a494fe",
+            "message": {
+                "id": "b7b9887b-3133-4dc9-847a-9bf177a494fe",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444694.296131,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here are 20 suggested names for this app:\n\n1. ChatMD\n2. GPT2MD\n3. ChatMarkdown\n4. GPTChatConverter\n5. GPTTranscript\n6. MarkdownChat\n7. GPTChatMark\n8. GPTChatFormatter\n9. GPTLog2MD\n10. AssistantChatMD\n11. GPTSessionMD\n12. AIChatToMD\n13. GPTChatMD\n14. MarkdownGPT\n15. GPTChatExport\n16. GPTDiary\n17. ChatLogMD\n18. GPTMarkdownizer\n19. MarkdownAssistant\n20. ChatFormatter\n\nFeel free to mix and match parts of these names or use them as inspiration for your own unique name for the app."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "2b99c154-4a6a-4db1-88ff-548abbf84108",
+            "children": [
+                "28c20e10-8a33-43f7-852f-9e291190c28a"
+            ]
+        },
+        "28c20e10-8a33-43f7-852f-9e291190c28a": {
+            "id": "28c20e10-8a33-43f7-852f-9e291190c28a",
+            "message": {
+                "id": "28c20e10-8a33-43f7-852f-9e291190c28a",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444716.18265,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please try again but generate 30 names this time and try to be more witty or include puns"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "b7b9887b-3133-4dc9-847a-9bf177a494fe",
+            "children": [
+                "85676369-beb3-458b-9956-5cfcaa6b7672"
+            ]
+        },
+        "85676369-beb3-458b-9956-5cfcaa6b7672": {
+            "id": "85676369-beb3-458b-9956-5cfcaa6b7672",
+            "message": {
+                "id": "85676369-beb3-458b-9956-5cfcaa6b7672",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444750.39926,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here are 30 witty or pun-inspired names for this app:\n\n1. MarkDownToChat\n2. GPTeaTime\n3. ChattingMarkdown\n4. GPTalkToMD\n5. AIChatterbox\n6. GPTPunScript\n7. ChatterMark\n8. GPTChatterMD\n9. MarkDownTheChat\n10. ChatMDemonium\n11. MarkdownWhisperer\n12. GPTChitChat2MD\n13. GPTDialogueDresser\n14. AIChitChatr\n15. ChatGPTerpreter\n16. GPTChatterScript\n17. MarkMyChat\n18. GPTWordsmith\n19. ChatChronicles\n20. GPTChatQuill\n21. TheChatOwls\n22. GPTScriptScribe\n23. ChatGPTales\n24. GPTChatterMatter\n25. MarkdownMingle\n26. GPTConversMD\n27. GPTChatSculptor\n28. AIChatterChef\n29. GPTTalkTale\n30. Chatlography\n\nFeel free to use these names or use them as inspiration to create your own unique and witty name for the app."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "28c20e10-8a33-43f7-852f-9e291190c28a",
+            "children": [
+                "467c2c6b-ab8a-4b44-925b-aa22a20e4391",
+                "7736d75b-d69e-498d-aa6d-d0d802f6209e",
+                "cbb62eee-fb0e-4e4d-8b27-77ef93dfd7f0"
+            ]
+        },
+        "467c2c6b-ab8a-4b44-925b-aa22a20e4391": {
+            "id": "467c2c6b-ab8a-4b44-925b-aa22a20e4391",
+            "message": {
+                "id": "467c2c6b-ab8a-4b44-925b-aa22a20e4391",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444817.871554,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write a laid back read me file for this app using the name chattermark. Please include typical sections including showing examples of usage and input files and output format"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "85676369-beb3-458b-9956-5cfcaa6b7672",
+            "children": [
+                "a4578434-622f-4bd3-a487-af79ba238cac"
+            ]
+        },
+        "a4578434-622f-4bd3-a487-af79ba238cac": {
+            "id": "a4578434-622f-4bd3-a487-af79ba238cac",
+            "message": {
+                "id": "a4578434-622f-4bd3-a487-af79ba238cac",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444849.333338,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "# ChatterMark 🗣️➡️📝\n\nChatterMark is a simple and laid-back CLI app for converting GPT chat sessions from JSON format to readable Markdown files. It's perfect for documenting your AI chat logs in a visually appealing and easy-to-read format. Kick back, relax, and let ChatterMark handle the transformation for you.\n\n## Table of Contents\n\n- [Installation](#installation)\n- [Usage](#usage)\n- [Input File Format](#input-file-format)\n- [Output Format](#output-format)\n- [Examples](#examples)\n- [Contributing](#contributing)\n- [License](#license)\n\n## Installation\n\nChatterMark requires Python 3.7 or higher. You can install it using `pip`:\n\n```bash\npip install chattermark\n```\n\n## Usage\n\nChatterMark is super chill to use. Just provide the input JSON file and the output Markdown file, and let the magic happen:\n\n```bash\nchattermark input.json output.md\n```\n\nReplace `input.json` with the path to your chat session JSON file and `output.md` with the path where you want to save the generated Markdown file.\n\n## Input File"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "467c2c6b-ab8a-4b44-925b-aa22a20e4391",
+            "children": []
+        },
+        "7736d75b-d69e-498d-aa6d-d0d802f6209e": {
+            "id": "7736d75b-d69e-498d-aa6d-d0d802f6209e",
+            "message": {
+                "id": "7736d75b-d69e-498d-aa6d-d0d802f6209e",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444868.362569,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write a fun read me file for this app using the name chattermark. Please include typical sections including showing examples of usage and input files and output format"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "85676369-beb3-458b-9956-5cfcaa6b7672",
+            "children": [
+                "a1fa70dd-c789-44de-a423-7f25727b6eea"
+            ]
+        },
+        "a1fa70dd-c789-44de-a423-7f25727b6eea": {
+            "id": "a1fa70dd-c789-44de-a423-7f25727b6eea",
+            "message": {
+                "id": "a1fa70dd-c789-44de-a423-7f25727b6eea",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444875.110241,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "# ChatterMark\n\nChatterMark is a witty and fun CLI app that converts your GPT chat session JSON files into a beautifully formatted Markdown representation. Now you can easily share, read, and keep track of your"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "7736d75b-d69e-498d-aa6d-d0d802f6209e",
+            "children": []
+        },
+        "cbb62eee-fb0e-4e4d-8b27-77ef93dfd7f0": {
+            "id": "cbb62eee-fb0e-4e4d-8b27-77ef93dfd7f0",
+            "message": {
+                "id": "cbb62eee-fb0e-4e4d-8b27-77ef93dfd7f0",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681444912.053425,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write a fun read me file for this app using the name chattermark. Please include typical sections including showing examples of usage and input files and output format. Please use up to three emojis after the title heading which are appropriate to capture the spirit of the app"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "85676369-beb3-458b-9956-5cfcaa6b7672",
+            "children": [
+                "ad6318f8-7014-45b1-a773-94cec66bb0e0"
+            ]
+        },
+        "ad6318f8-7014-45b1-a773-94cec66bb0e0": {
+            "id": "ad6318f8-7014-45b1-a773-94cec66bb0e0",
+            "message": {
+                "id": "ad6318f8-7014-45b1-a773-94cec66bb0e0",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681444968.525691,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "# ChatterMark 🗣️✍️🎉\n\nChatterMark is a fun and easy-to-use command-line application that converts GPT chat sessions into beautifully formatted Markdown files. It's perfect for quickly documenting your conversations with AI chatbots in a clean and readable format!\n\n## Features\n\n- Convert JSON chat sessions to Markdown format\n- Supports GPT chat sessions with timestamps and multiple users\n- Automatically formats AI assistant responses as block quotes\n\n## Installation\n\nTo install ChatterMark, simply run the following command:\n\n```bash\npip install chattermark\n```\n\n## Usage\n\nChatterMark is super easy to use! Just run the following command, replacing `input.json` with the path to your GPT chat session JSON file and `output.md` with the desired path for your Markdown output file:\n\n```bash\nchattermark input.json output.md\n```\n\n### Input JSON Format\n\nThe input JSON file should contain a chat session in the following format:\n\n```json\n{\n    \"session_id\": \"some_unique_id\",\n    \"messages\": [\n        {\"sender\": \"user\", \"content\": \"Hello, GPT!\", \"timestamp\": \"2023-04-13T15:32:10.123Z\"},\n        {\"sender\": \"assistant\", \"content\": \"Hello! How can I help you?\", \"timestamp\": \"2023-04-13T15:32:12.456Z\"}\n    ]\n}\n```\n\n### Output Markdown Format\n\nChatterMark will generate a Markdown file with the following structure:\n\n```\nuser: Hello, GPT!\n> Hello! How can I help you?\n```\n\nAs you can see, AI assistant responses are formatted as block quotes, making it easy to distinguish between user inputs and AI outputs.\n\n## Contributing\n\nIf you'd like to contribute to ChatterMark, feel free to open a pull request or create an issue. We appreciate any feedback or improvements you may have!\n\n## License\n\nChatterMark is released under the [MIT License](https://opensource.org/licenses/MIT).\n\n## Credits\n\nChatterMark was created by an enthusiastic team of developers who believe that fun and productivity can go hand in hand! We hope you enjoy using ChatterMark as much as we enjoyed creating it."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "cbb62eee-fb0e-4e4d-8b27-77ef93dfd7f0",
+            "children": [
+                "505a8f9b-5c4b-4c2f-a9e5-4d45abcb1ff1"
+            ]
+        },
+        "505a8f9b-5c4b-4c2f-a9e5-4d45abcb1ff1": {
+            "id": "505a8f9b-5c4b-4c2f-a9e5-4d45abcb1ff1",
+            "message": {
+                "id": "505a8f9b-5c4b-4c2f-a9e5-4d45abcb1ff1",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681445113.538656,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write pytest cases for gpt_chat_session_to_md"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ad6318f8-7014-45b1-a773-94cec66bb0e0",
+            "children": [
+                "26742dc1-6c04-480d-8532-4d8e5d1d17ec"
+            ]
+        },
+        "26742dc1-6c04-480d-8532-4d8e5d1d17ec": {
+            "id": "26742dc1-6c04-480d-8532-4d8e5d1d17ec",
+            "message": {
+                "id": "26742dc1-6c04-480d-8532-4d8e5d1d17ec",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681445184.445959,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To write pytest cases for the `gpt_chat_session_to_md` function, first make sure you have pytest installed:\n\n```bash\npip install pytest\n```\n\nNow, create a new Python file for your tests, such as `test_gpt_chat_to_md.py`. In this file, you'll define test cases for different scenarios:\n\n```python\n# test_gpt_chat_to_md.py\nimport pytest\nfrom gpt_chat_model import GPTChatSession, Message\nfrom gpt_chat_to_md import gpt_chat_session_to_md\nfrom datetime import datetime\n\n@pytest.fixture\ndef sample_chat_session():\n    messages = [\n        Message(\n            sender=\"user\",\n            content=\"Hello, GPT!\",\n            timestamp=datetime.fromisoformat(\"2023-04-13T15:32:10.123Z\"),\n        ),\n        Message(\n            sender=\"assistant\",\n            content=\"Hello! How can I help you?\",\n            timestamp=datetime.fromisoformat(\"2023-04-13T15:32:12.456Z\"),\n        ),\n    ]\n    return GPTChatSession(session_id=\"some_unique_id\", messages=messages)\n\ndef test_gpt_chat_session_to_md(sample_chat_session):\n    expected_output = (\n        \"user: Hello, GPT!\\n\"\n        \"> Hello! How can I help you?\\n\"\n    )\n    md_output = gpt_chat_session_to_md(sample_chat_session)\n    assert md_output == expected_output\n\ndef test_empty_chat_session():\n    chat_session = GPTChatSession(session_id=\"empty_session\", messages=[])\n    expected_output = \"\"\n    md_output = gpt_chat_session_to_md(chat_session)\n    assert md_output == expected_output\n\ndef test_chat_session_with_unknown_sender_type():\n    messages = [\n        Message(\n            sender=\"unknown\",\n            content=\"I'm not a user or an assistant!\",\n            timestamp=datetime.fromisoformat(\"2023-04-13T15:32:10.123Z\"),\n        ),\n    ]\n    chat_session = GPTChatSession(session_id=\"unknown_sender\", messages=messages)\n    expected_output = \"unknown: I'm not a user or an assistant!\\n\"\n    md_output = gpt_chat_session_to_md(chat_session)\n    assert md_output == expected_output\n```\n\nIn this example, we have three test cases:\n\n1. `test_gpt_chat_session_to_md`: Tests the normal behavior of the function with a sample chat session.\n2. `test_empty_chat_session`: Tests the function with an empty chat session (no messages).\n3. `test_chat_session_with_unknown_sender_type`: Tests the function with a chat session containing a message with an unknown sender type.\n\nTo run the tests, simply execute the following command in your terminal:\n\n```bash\npytest test_gpt_chat_to_md.py\n```\n\nThis command will run the test cases and display the results."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "505a8f9b-5c4b-4c2f-a9e5-4d45abcb1ff1",
+            "children": [
+                "1992867c-0227-4743-9bbb-24dfbfedfb9d"
+            ]
+        },
+        "1992867c-0227-4743-9bbb-24dfbfedfb9d": {
+            "id": "1992867c-0227-4743-9bbb-24dfbfedfb9d",
+            "message": {
+                "id": "1992867c-0227-4743-9bbb-24dfbfedfb9d",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681445269.109121,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please generate all required files to configure a project containing the tests CLI app and code function module as a poetry project. Include pre-commit configuration file as well, applying isort and black"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "26742dc1-6c04-480d-8532-4d8e5d1d17ec",
+            "children": [
+                "7a1291f9-bc97-4d57-a25c-8367af9cce05"
+            ]
+        },
+        "7a1291f9-bc97-4d57-a25c-8367af9cce05": {
+            "id": "7a1291f9-bc97-4d57-a25c-8367af9cce05",
+            "message": {
+                "id": "7a1291f9-bc97-4d57-a25c-8367af9cce05",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681445347.435626,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To create a Poetry project with the ChatterMark CLI app, tests, and pre-commit configuration, follow these steps:\n\n1. Install Poetry:\n\n```bash\npip install poetry\n```\n\n2. Create a new project directory and initialize a Poetry project:\n\n```bash\nmkdir chattermark\ncd chattermark\npoetry init\n```\n\nFollow the prompts to configure your project (e.g., name, version, author, etc.). When asked about dependencies and dev-dependencies, you can skip them for now, as we'll add them manually in the next step.\n\n3. Add the necessary dependencies to `pyproject.toml`:\n\n```toml\n[tool.poetry.dependencies]\npython = \"^3.8\"\ntyper = \"^0.4.0\"\nrich = \"^10.0.0\"\npydantic = \"^1.8.2\"\n\n[tool.poetry.dev-dependencies]\npytest = \"^6.2.5\"\nblack = \"^21.9b0\"\nisort = \"^5.9.3\"\npre-commit = \"^2.16.0\"\n```\n\n4. Install the project dependencies with Poetry:\n\n```bash\npoetry install\n```\n\n5. Create the necessary directories and files for your project:\n\n```bash\nmkdir chattermark\ntouch chattermark/__init__.py\ntouch chattermark/gpt_chat_model.py\ntouch chattermark/gpt_chat_to_md.py\ntouch chattermark/gpt_chat_cli.py\n\nmkdir tests\ntouch tests/__init__.py\ntouch tests/test_gpt_chat_to_md.py\n```\n\n6. Copy the code from your previous Python files (gpt_chat_model.py, gpt_chat_to_md.py, and gpt_chat_cli.py) into the corresponding files in the `chattermark` directory.\n\n7. Copy the test code from `test_gpt_chat_to_md.py` into the corresponding file in the `tests` directory.\n\n8. Create a `.pre-commit-config.yaml` file at the root of the project with the following content:\n\n```yaml\nrepos:\n  - repo: https://github.com/ambv/black\n    rev: 21.9b0\n    hooks:\n      - id: black\n        language_version: python3.8\n\n  - repo: https://github.com/pycqa/isort\n    rev: 5.9.3\n    hooks:\n      - id: isort\n        language_version: python3.8\n```\n\n9. Install and configure pre-commit:\n\n```bash\npoetry run pre-commit install\n```\n\nNow you have a Poetry project with the ChatterMark CLI app, tests, and pre-commit configuration set up. To run the tests, use the following command:\n\n```bash\npoetry run pytest tests/\n```\n\nTo run the ChatterMark CLI app, use the following command:\n\n```bash\npoetry run python chattermark/gpt_chat_cli.py input.json output.md\n```\n\nMake sure to replace `input.json` and `output.md` with the appropriate file paths."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "1992867c-0227-4743-9bbb-24dfbfedfb9d",
+            "children": [
+                "fb39c52d-2d9c-4256-b1b3-a01d151b8502"
+            ]
+        },
+        "fb39c52d-2d9c-4256-b1b3-a01d151b8502": {
+            "id": "fb39c52d-2d9c-4256-b1b3-a01d151b8502",
+            "message": {
+                "id": "fb39c52d-2d9c-4256-b1b3-a01d151b8502",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681445368.302646,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please leave the dev dependencies as they are, but make the runtime dependencies as loose as possible"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "7a1291f9-bc97-4d57-a25c-8367af9cce05",
+            "children": [
+                "e8f378a6-8814-481d-90d0-8f4ea0e9f7e9"
+            ]
+        },
+        "e8f378a6-8814-481d-90d0-8f4ea0e9f7e9": {
+            "id": "e8f378a6-8814-481d-90d0-8f4ea0e9f7e9",
+            "message": {
+                "id": "e8f378a6-8814-481d-90d0-8f4ea0e9f7e9",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681445392.263058,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "You can make the runtime dependencies as loose as possible by specifying only the major version numbers in the `pyproject.toml` file. This way, the dependencies will be more flexible, allowing the project to work with a wider range of dependency versions.\n\nHere's the updated `pyproject.toml` file with looser runtime dependencies:\n\n```toml\n[tool.poetry.dependencies]\npython = \"^3.8\"\ntyper = \"^0\"\nrich = \"^10\"\npydantic = \"^1\"\n\n[tool.poetry.dev-dependencies]\npytest = \"^6.2.5\"\nblack = \"^21.9b0\"\nisort = \"^5.9.3\"\npre-commit = \"^2.16.0\"\n```\n\nBy specifying only the major version numbers for `typer`, `rich`, and `pydantic`, you allow Poetry to use any minor or patch version within the major version range. This provides greater flexibility for your project while still ensuring compatibility with the major version of each dependency."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "fb39c52d-2d9c-4256-b1b3-a01d151b8502",
+            "children": [
+                "38fe34cd-73ba-450e-b073-49779b9a6b5b"
+            ]
+        },
+        "38fe34cd-73ba-450e-b073-49779b9a6b5b": {
+            "id": "38fe34cd-73ba-450e-b073-49779b9a6b5b",
+            "message": {
+                "id": "38fe34cd-73ba-450e-b073-49779b9a6b5b",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681445535.989279,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "How may this project be published to python package index?"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "e8f378a6-8814-481d-90d0-8f4ea0e9f7e9",
+            "children": [
+                "53a88990-839f-447b-85c9-51729f720d61"
+            ]
+        },
+        "53a88990-839f-447b-85c9-51729f720d61": {
+            "id": "53a88990-839f-447b-85c9-51729f720d61",
+            "message": {
+                "id": "53a88990-839f-447b-85c9-51729f720d61",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681445594.057532,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To publish your project to the Python Package Index (PyPI), follow these steps:\n\n1. Make sure you have an account on [PyPI](https://pypi.org/) and the [Test PyPI](https://test.pypi.org/) repository. If you don't, create accounts on both websites.\n\n2. Install the necessary tools to upload the package:\n\n```bash\npip install --upgrade twine\n```\n\n3. Ensure your project has the necessary metadata in the `pyproject.toml` file. At a minimum, include the following fields:\n\n- `name`: The package name.\n- `version`: The package version.\n- `description`: A brief description of the package.\n- `authors`: The author(s) of the package.\n- `license`: The license for the package.\n\nHere's an example of the `[tool.poetry]` section in `pyproject.toml` with the required metadata:\n\n```toml\n[tool.poetry]\nname = \"chattermark\"\nversion = \"0.1.0\"\ndescription = \"A CLI app to convert GPT chat sessions into Markdown format.\"\nauthors = [\"Your Name <your.email@example.com>\"]\nlicense = \"MIT\"\n```\n\n4. Build your package using Poetry:\n\n```bash\npoetry build\n```\n\nThis command will generate a source distribution (`.tar.gz`) and a wheel distribution (`.whl`) in the `dist` directory.\n\n5. Upload the package to the Test PyPI repository to ensure everything works as expected:\n\n```bash\ntwine upload --repository-url https://test.pypi.org/legacy/ dist/*\n```\n\n6. Verify that your package is uploaded correctly on [Test PyPI](https://test.pypi.org/). You should see your package listed with the correct metadata.\n\n7. Once you're satisfied with your package on Test PyPI, upload it to the real PyPI repository:\n\n```bash\ntwine upload dist/*\n```\n\nCongratulations! Your package is now published on the Python Package Index, and users can install it using pip:\n\n```bash\npip install chattermark\n```\n\nRemember to update the package version in the `pyproject.toml` file and rebuild the package every time you make changes and want to upload a new version to PyPI."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "38fe34cd-73ba-450e-b073-49779b9a6b5b",
+            "children": [
+                "e1b91591-df62-4269-8212-ded878c77f0e"
+            ]
+        },
+        "e1b91591-df62-4269-8212-ded878c77f0e": {
+            "id": "e1b91591-df62-4269-8212-ded878c77f0e",
+            "message": {
+                "id": "e1b91591-df62-4269-8212-ded878c77f0e",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681445764.255033,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write any configuration files and python code required to use setuptools_scm for package versioning. Please configure setuptools_scm to write the version to a file during the build process, and generate python code to resolve the top level __version__ of the package at run time using the generated file, but fall back to using setuptools_scm if the file is not found."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "53a88990-839f-447b-85c9-51729f720d61",
+            "children": [
+                "57a383ae-91a4-43ea-a7ab-56550e92d094"
+            ]
+        },
+        "57a383ae-91a4-43ea-a7ab-56550e92d094": {
+            "id": "57a383ae-91a4-43ea-a7ab-56550e92d094",
+            "message": {
+                "id": "57a383ae-91a4-43ea-a7ab-56550e92d094",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681445806.747056,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To use `setuptools_scm` for package versioning, follow these steps:\n\n1. Add `setuptools_scm` as a development dependency in your `pyproject.toml`:\n\n```toml\n[tool.poetry.dev-dependencies]\n# ...\nsetuptools_scm = \"^6.3.2\"\n```\n\n2. Install the new dependency:\n\n```bash\npoetry install\n```\n\n3. Create a `pyproject.toml` file in the root directory of your project if it doesn't already exist, and add the following configuration for `setuptools_scm`:\n\n```toml\n[tool.setuptools_scm]\nwrite_to = \"chattermark/version.py\"\n```\n\nThis configuration instructs `setuptools_scm` to write the version to a file named `version.py` in the `chattermark` package directory during the build process.\n\n4. Modify your package's `__init__.py` file to resolve the top-level `__version__` attribute. First, try to read the version from the generated `version.py` file. If the file is not found, fall back to using `setuptools_scm`:\n\n```python\n# chattermark/__init__.py\n\ntry:\n    from .version import version as __version__\nexcept ImportError:\n    try:\n        from setuptools_scm import get_version\n\n        __version__ = get_version(root=\"..\", relative_to=__file__)\n    except (ImportError, LookupError):\n        __version__ = \"unknown\"\n```\n\nNow, `setuptools_scm` will handle package versioning, and the package's top-level `__version__` attribute will be resolved at runtime using the generated file or falling back to `setuptools_scm` if the file is not found."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "e1b91591-df62-4269-8212-ded878c77f0e",
+            "children": [
+                "d9a4d213-bc82-465b-b2e6-e17126f918e2"
+            ]
+        },
+        "d9a4d213-bc82-465b-b2e6-e17126f918e2": {
+            "id": "d9a4d213-bc82-465b-b2e6-e17126f918e2",
+            "message": {
+                "id": "d9a4d213-bc82-465b-b2e6-e17126f918e2",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681445851.86502,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please write a read me section describing how the output markdown can be converted to various other formats, for example a word document or an HTML file, using pandoc"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "57a383ae-91a4-43ea-a7ab-56550e92d094",
+            "children": [
+                "0d6451f3-0b8d-4e32-8254-33b3cc75caae"
+            ]
+        },
+        "0d6451f3-0b8d-4e32-8254-33b3cc75caae": {
+            "id": "0d6451f3-0b8d-4e32-8254-33b3cc75caae",
+            "message": {
+                "id": "0d6451f3-0b8d-4e32-8254-33b3cc75caae",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681445899.000888,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "## Converting Output Markdown to Other Formats using Pandoc\n\n[Pandoc](https://pandoc.org/) is a powerful command-line tool that can convert documents between various markup and word processing formats. You can use Pandoc to convert the output Markdown file generated by ChatterMark to other formats, such as Word documents, HTML files, and more.\n\n### Installation\n\nTo get started with Pandoc, first, install it on your system by following the instructions in the [official documentation](https://pandoc.org/installing.html).\n\n### Usage\n\nAfter installing Pandoc, you can convert the output Markdown file to other formats with a single command. For example:\n\n1. **Converting Markdown to a Word document**:\n\n```bash\npandoc output.md -o output.docx\n```\n\nThis command converts the `output.md` file to a Word document named `output.docx`.\n\n2. **Converting Markdown to an HTML file**:\n\n```bash\npandoc output.md -o output.html\n```\n\nThis command converts the `output.md` file to an HTML file named `output.html`.\n\n3. **Converting Markdown to a PDF file**:\n\nTo convert Markdown to PDF, you'll also need to have a LaTeX distribution installed on your system. For more information, check the [Pandoc documentation](https://pandoc.org/installing.html#installing-latex) on installing LaTeX.\n\n```bash\npandoc output.md -o output.pdf\n```\n\nThis command converts the `output.md` file to a PDF file named `output.pdf`.\n\n### Additional Options\n\nPandoc provides many options and customizations for document conversion. You can find more information in the [official Pandoc documentation](https://pandoc.org/MANUAL.html).\n\nBy leveraging the power of Pandoc, you can easily convert the Markdown files generated by ChatterMark into various formats, making your chat session records more accessible and versatile."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "d9a4d213-bc82-465b-b2e6-e17126f918e2",
+            "children": [
+                "48663740-d328-4256-b99d-f8da5d7202b4"
+            ]
+        },
+        "48663740-d328-4256-b99d-f8da5d7202b4": {
+            "id": "48663740-d328-4256-b99d-f8da5d7202b4",
+            "message": {
+                "id": "48663740-d328-4256-b99d-f8da5d7202b4",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681446674.546966,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please add an entry point to allow chattermark to be called just using `chattermark ...`."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "0d6451f3-0b8d-4e32-8254-33b3cc75caae",
+            "children": [
+                "a67db67d-aa24-4c3c-acec-9aeda1c81f56"
+            ]
+        },
+        "a67db67d-aa24-4c3c-acec-9aeda1c81f56": {
+            "id": "a67db67d-aa24-4c3c-acec-9aeda1c81f56",
+            "message": {
+                "id": "a67db67d-aa24-4c3c-acec-9aeda1c81f56",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681446704.437338,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To add an entry point for the ChatterMark CLI app, update the `pyproject.toml` file to include a `[tool.poetry.scripts]` section. This section will define a console script entry point that maps the `chattermark` command to the main function of your CLI app:\n\n```toml\n[tool.poetry.scripts]\nchattermark = \"chattermark.gpt_chat_cli:main\"\n```\n\nIn this example, the `chattermark` command will call the `main` function from the `gpt_chat_cli` module in the `chattermark` package.\n\nAfter adding the entry point, install the package locally with the following command:\n\n```bash\npoetry install\n```\n\nNow, you can call ChatterMark using the `chattermark` command followed by the arguments for your CLI app. For example:\n\n```bash\nchattermark input.json output.md\n```\n\nThis will run the ChatterMark CLI app with the specified input and output file paths. Note that you might need to activate the Poetry virtual environment first, or use `poetry run chattermark ...` if the command is not recognized directly."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "48663740-d328-4256-b99d-f8da5d7202b4",
+            "children": []
+        }
+    },
+    "moderation_results": [],
+    "current_node": "a67db67d-aa24-4c3c-acec-9aeda1c81f56"
+}
