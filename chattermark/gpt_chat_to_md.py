@@ -1,37 +1,53 @@
 # gpt_chat_to_md.py
+from datetime import datetime
+
 from .gpt_chat_model import GPTChatSession
+
+from datetime import datetime
 
 
 def gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:
     md_output = []
 
-    for message in chat_session.messages:
-        if message.sender == "assistant":
-            md_output.append(f"> {message.content}\n")
-        else:
-            md_output.append(f"{message.sender}: {message.content}\n")
+    nodes_to_process = sorted(
+        [node for node in chat_session.mapping.values() if node.message is not None],
+        key=lambda node: node.message.create_time,
+    )
+
+    previous_user_output = ""
+    for node in nodes_to_process:
+        message = node.message
+
+        if message.author.role == "assistant":
+            if "interrupted" in message.metadata:
+                previous_user_output = ""  # Discard the previous user message
+                continue  # Skip interrupted assistant message
+            else:
+                # Append the previous user message
+                md_output.append(previous_user_output)
+                previous_user_output = ""  # Reset the previous user message
+
+                # Format timestamp
+                formatted_timestamp = datetime.fromtimestamp(
+                    message.create_time
+                ).strftime("%Y-%m-%d %H:%M:%S")
+
+                # Apply block quote formatting to all lines of the assistant message
+                block_quoted_content = "> " + "\n> ".join(
+                    message.content.parts[0].splitlines()
+                )
+
+                md_output.append(
+                    f"_**{formatted_timestamp} - Assistant:**_\n\n{block_quoted_content}\n\n---\n\n"
+                )
+
+        elif message.author.role == "user":
+            # Format timestamp
+            formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
+            previous_user_output = (
+                f"**{formatted_timestamp} - User:**\n\n{message.content.parts[0]}\n\n"
+            )
 
     return "".join(md_output)
-
-
-if __name__ == "__main__":
-    # Example usage
-    from gpt_chat_model import Message
-    from datetime import datetime
-
-    messages = [
-        Message(
-            sender="user",
-            content="Hello, GPT!",
-            timestamp=datetime.fromisoformat("2023-04-13T15:32:10.123Z"),
-        ),
-        Message(
-            sender="assistant",
-            content="Hello! How can I help you?",
-            timestamp=datetime.fromisoformat("2023-04-13T15:32:12.456Z"),
-        ),
-    ]
-
-    gpt_chat_session = GPTChatSession(session_id="some_unique_id", messages=messages)
-    markdown_output = gpt_chat_session_to_md(gpt_chat_session)
-    print(markdown_output)
