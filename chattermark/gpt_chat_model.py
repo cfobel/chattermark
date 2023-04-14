@@ -1,18 +1,40 @@
-from datetime import datetime
-from typing import List
+from typing import Any, Dict, List, NewType, Optional
 
 from pydantic import BaseModel
 
 
+MetaData = NewType("MetaData", Dict[str, Any])
+
+
+class Author(BaseModel):
+    role: str
+    metadata: MetaData
+
+
+class Content(BaseModel):
+    content_type: str
+    parts: List[str]
+
+
 class Message(BaseModel):
-    sender: str
-    content: str
-    timestamp: datetime
+    id: str
+    author: Author
+    create_time: float
+    content: Content
+    weight: float
+    metadata: MetaData
+    recipient: str
+
+
+class Node(BaseModel):
+    id: str
+    message: Optional[Message] = None
+    parent: Optional[str] = None
+    children: List[str]
 
 
 class GPTChatSession(BaseModel):
-    session_id: str
-    messages: List[Message]
-
-    class Config:
-        extra = "ignore"  # To ignore any extra fields in the JSON that are not in the Pydantic model
+    title: str
+    create_time: float
+    update_time: float
+    mapping: Dict[str, Node]
