@@ -5,6 +5,7 @@ description = "A fun and easy-to-use command-line application that converts GPT 
 authors = ["Christian Fobel <christian@fobel.net>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/cfobel/chattermark"
 
 [tool.poetry.dependencies]
 python = "^3.11"
