@@ -2,7 +2,7 @@
 name = "chattermark"
 version = "0.1.0"
 description = "A fun and easy-to-use command-line application that converts GPT chat sessions into beautifully formatted Markdown files."
-authors = ["Christian Fobel"]
+authors = ["Christian Fobel <christian@fobel.net>"]
 license = "MIT"
 readme = "README.md"
 
