@@ -1,7 +1,7 @@
 {
     "title": "dev(python/chattermark): convert chat GPT sessions to markdown",
     "create_time": 1681444192.748429,
-    "update_time": 1681446704.0,
+    "update_time": 1681451232.0,
     "mapping": {
         "28a3517d-fbf6-459d-af6b-8617b71c8aaf": {
             "id": "28a3517d-fbf6-459d-af6b-8617b71c8aaf",
@@ -949,9 +949,1087 @@
                 "recipient": "all"
             },
             "parent": "48663740-d328-4256-b99d-f8da5d7202b4",
+            "children": [
+                "93948b15-cb8c-45fa-a908-60b35cfd5766"
+            ]
+        },
+        "93948b15-cb8c-45fa-a908-60b35cfd5766": {
+            "id": "93948b15-cb8c-45fa-a908-60b35cfd5766",
+            "message": {
+                "id": "93948b15-cb8c-45fa-a908-60b35cfd5766",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681448248.157656,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "It looks like the Pydantic model is not correct. Here is an example JSON GPTChatSession:\n\n```json\n{\n    \"title\": \"dev(python/chattermark): convert chat GPT sessions to markdown\",\n    \"create_time\": 1681444192.748429,\n    \"update_time\": 1681446704.0,\n    \"mapping\": {\n        \"91cbef32-4d36-48e8-95ab-a839c0d6e367\": {\n            \"id\": \"91cbef32-4d36-48e8-95ab-a839c0d6e367\",\n            \"message\": {\n                \"id\": \"91cbef32-4d36-48e8-95ab-a839c0d6e367\",\n                \"author\": {\n                    \"role\": \"user\",\n                    \"metadata\": {}\n                },\n                \"create_time\": 1681444252.398385,\n                \"content\": {\n                    \"content_type\": \"text\",\n                    \"parts\": [\n                        \"Please define a pydantic model for a json representation of a chat GPT session as extracted from a Chrome browser session using the developer tools.\"\n                    ]\n                },\n                \"weight\": 1.0,\n                \"metadata\": {\n                    \"timestamp_\": \"absolute\"\n                },\n                \"recipient\": \"all\"\n            },\n            \"parent\": \"28a3517d-fbf6-459d-af6b-8617b71c8aaf\",\n            \"children\": [\n                \"34a64823-b94a-49c1-a486-102b488c014b\"\n            ]\n        },\n        \"34a64823-b94a-49c1-a486-102b488c014b\": {\n            \"id\": \"34a64823-b94a-49c1-a486-102b488c014b\",\n            \"message\": {\n                \"id\": \"34a64823-b94a-49c1-a486-102b488c014b\",\n                \"author\": {\n                    \"role\": \"assistant\",\n                    \"metadata\": {}\n                },\n                \"create_time\": 1681444313.495389,\n                \"content\": {\n                    \"content_type\": \"text\",\n                    \"parts\": [\n                        \"To create a Pydantic model for a JSON representation of a chat GPT session extracted from a Chrome browser session using the developer tools, you'll first need to identify the data structure and fields in the JSON. I'll assume a basic structure with user and AI messages, along with their timestamps. You may need to adjust the fields according to the actual JSON structure you have.\\n\\nFirst, install Pydantic by running:\\n\\n```\\npip install pydantic\\n```\\n\\nThen, create a Python file (e.g., `gpt_chat_model.py`) and define the Pydantic models as follows:\\n\\n```python\\nfrom datetime import datetime\\nfrom typing import List\\nfrom pydantic import BaseModel\\n\\nclass Message(BaseModel):\\n    sender: str\\n    content: str\\n    timestamp: datetime\\n\\nclass GPTChatSession(BaseModel):\\n    session_id: str\\n    messages: List[Message]\\n\\n    class Config:\\n        extra = \\\"ignore\\\"  # To ignore any extra fields in the JSON that are not in the Pydantic model\\n```\\n\\nIn this example, we define a `Message` model that has `sender`, `content`, and `timestamp` fields, and a `GPTChatSession` model that has `session_id` and a list of `Message` objects as `messages`.\\n\\nYou can now use this model to parse the JSON data extracted from the Chrome browser session:\\n\\n```python\\nfrom gpt_chat_model import GPTChatSession\\nimport json\\n\\n# Replace this with the actual JSON string extracted from the Chrome browser session\\njson_data = '''\\n{\\n    \\\"session_id\\\": \\\"some_unique_id\\\",\\n    \\\"messages\\\": [\\n        {\\\"sender\\\": \\\"user\\\", \\\"content\\\": \\\"Hello, GPT!\\\", \\\"timestamp\\\": \\\"2023-04-13T15:32:10.123Z\\\"},\\n        {\\\"sender\\\": \\\"assistant\\\", \\\"content\\\": \\\"Hello! How can I help you?\\\", \\\"timestamp\\\": \\\"2023-04-13T15:32:12.456Z\\\"}\\n    ]\\n}\\n'''\\n\\n# Deserialize the JSON string to a GPTChatSession instance\\ngpt_chat_session = GPTChatSession.parse_raw(json_data)\\n\\nprint(gpt_chat_session)\\n```\\n\\nRemember to replace `json_data` with the actual JSON string extracted from the browser session. The `GPTChatSession` instance will now contain the parsed data, which can be accessed and manipulated as needed.\"\n                    ]\n                },\n                \"end_turn\": true,\n                \"weight\": 1.0,\n                \"metadata\": {\n                    \"model_slug\": \"gpt-4\",\n                    \"finish_details\": {\n                        \"type\": \"stop\",\n                        \"stop\": \"\"\n                    },\n                    \"timestamp_\": \"absolute\"\n                },\n                \"recipient\": \"all\"\n            },\n            \"parent\": \"91cbef32-4d36-48e8-95ab-a839c0d6e367\",\n            \"children\": [\n                \"202972c5-4095-4c69-a710-59225cf2dcb0\"\n            ]\n        }\n    },\n    \"parent\": \"48663740-d328-4256-b99d-f8da5d7202b4\",\n    \"children\": []\n}\n```\n\nPlease update the `GPTChatSession` model and `gpt_chat_session_to_md` accordingly. Also, add formatted timestamps to the messages in Markdown output put horizontal rulers between pairs of user/response messages."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "a67db67d-aa24-4c3c-acec-9aeda1c81f56",
+            "children": [
+                "0bbe8ac0-542a-49af-866d-593c3b59fd2f"
+            ]
+        },
+        "0bbe8ac0-542a-49af-866d-593c3b59fd2f": {
+            "id": "0bbe8ac0-542a-49af-866d-593c3b59fd2f",
+            "message": {
+                "id": "0bbe8ac0-542a-49af-866d-593c3b59fd2f",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681448310.189584,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Based on the provided JSON example, I've updated the Pydantic model for `GPTChatSession` and the `gpt_chat_session_to_md` function as requested:\n\n1. Update the Pydantic model:\n\n```python\nfrom datetime import datetime\nfrom typing import Dict, List, Union\nfrom pydantic import BaseModel\n\nclass Author(BaseModel):\n    role: str\n    metadata: Dict[str, str]\n\nclass Content(BaseModel):\n    content_type: str\n    parts: List[str]\n\nclass Message(BaseModel):\n    id: str\n    author: Author\n    create_time: float\n    content: Content\n    weight: float\n    metadata: Dict[str, Union[str, float]]\n    recipient: str\n\nclass Node(BaseModel):\n    id: str\n    message: Message\n    parent: str\n    children: List[str]\n\nclass GPTChatSession(BaseModel):\n    title: str\n    create_time: float\n    update_time: float\n    mapping: Dict[str, Node]\n    parent: str\n    children: List[str]\n```\n\n2. Update the `gpt_chat_session_to_md` function:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n    nodes_to_process = list(chat_session.children)\n\n    while nodes_to_process:\n        node_id = nodes_to_process.pop(0)\n        node = chat_session.mapping[node_id]\n        message = node.message\n\n        # Format timestamp\n        formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n\n        if message.author.role == \"user\":\n            md_output.append(f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\")\n            md_output.append(\"---\\n\")  # Add horizontal ruler\n        else:\n            md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n> {message.content.parts[0]}\\n\")\n\n        nodes_to_process.extend(node.children)\n\n    return \"\".join(md_output)\n```\n\nNow, the `GPTChatSession` model will correctly represent the JSON structure, and the `gpt_chat_session_to_md` function will include formatted timestamps and horizontal rulers between pairs of user/response messages in the generated Markdown output."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "93948b15-cb8c-45fa-a908-60b35cfd5766",
+            "children": [
+                "635f5b8a-3c9f-4574-805e-bd6fbdfe9424"
+            ]
+        },
+        "635f5b8a-3c9f-4574-805e-bd6fbdfe9424": {
+            "id": "635f5b8a-3c9f-4574-805e-bd6fbdfe9424",
+            "message": {
+                "id": "635f5b8a-3c9f-4574-805e-bd6fbdfe9424",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681448352.365752,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please update the test cases as well."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "0bbe8ac0-542a-49af-866d-593c3b59fd2f",
+            "children": [
+                "61da6d06-6a50-4364-94fa-fd94e5523718"
+            ]
+        },
+        "61da6d06-6a50-4364-94fa-fd94e5523718": {
+            "id": "61da6d06-6a50-4364-94fa-fd94e5523718",
+            "message": {
+                "id": "61da6d06-6a50-4364-94fa-fd94e5523718",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681448436.974588,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here are the updated pytest test cases for the `gpt_chat_session_to_md` function:\n\n```python\nimport json\nfrom chattermark import GPTChatSession, gpt_chat_session_to_md\n\ndef test_gpt_chat_session_to_md():\n    chat_session_json = '''\n    {\n        \"title\": \"dev(python/chattermark): convert chat GPT sessions to markdown\",\n        \"create_time\": 1681444192.748429,\n        \"update_time\": 1681446704.0,\n        \"mapping\": {\n            \"node1\": {\n                \"id\": \"node1\",\n                \"message\": {\n                    \"id\": \"node1\",\n                    \"author\": {\n                        \"role\": \"user\",\n                        \"metadata\": {}\n                    },\n                    \"create_time\": 1681444252.398385,\n                    \"content\": {\n                        \"content_type\": \"text\",\n                        \"parts\": [\n                            \"Hello, how are you?\"\n                        ]\n                    },\n                    \"weight\": 1.0,\n                    \"metadata\": {\n                        \"timestamp_\": \"absolute\"\n                    },\n                    \"recipient\": \"all\"\n                },\n                \"parent\": \"root\",\n                \"children\": [\n                    \"node2\"\n                ]\n            },\n            \"node2\": {\n                \"id\": \"node2\",\n                \"message\": {\n                    \"id\": \"node2\",\n                    \"author\": {\n                        \"role\": \"assistant\",\n                        \"metadata\": {}\n                    },\n                    \"create_time\": 1681444313.495389,\n                    \"content\": {\n                        \"content_type\": \"text\",\n                        \"parts\": [\n                            \"I'm doing great! Thanks for asking.\"\n                        ]\n                    },\n                    \"end_turn\": true,\n                    \"weight\": 1.0,\n                    \"metadata\": {\n                        \"model_slug\": \"gpt-4\",\n                        \"finish_details\": {\n                            \"type\": \"stop\",\n                            \"stop\": \"\"\n                        },\n                        \"timestamp_\": \"absolute\"\n                    },\n                    \"recipient\": \"all\"\n                },\n                \"parent\": \"node1\",\n                \"children\": []\n            }\n        },\n        \"parent\": \"48663740-d328-4256-b99d-f8da5d7202b4\",\n        \"children\": [\n            \"node1\"\n        ]\n    }\n    '''\n    chat_session = GPTChatSession.parse_raw(chat_session_json)\n    expected_md_output = (\n        \"2023-04-13 15:30:52 - User:\\n\\n\"\n        \"Hello, how are you?\\n\"\n        \"---\\n\"\n        \"_2023-04-13 15:31:53 - Assistant:_\\n\\n\"\n        \"> I'm doing great! Thanks for asking.\\n\"\n    )\n\n    md_output = gpt_chat_session_to_md(chat_session)\n\n    assert md_output == expected_md_output\n```\n\nThis test case is based on the updated `GPTChatSession` model and the provided JSON example. It checks if the `gpt_chat_session_to_md` function correctly converts a chat session to the expected Markdown output, including formatted timestamps and horizontal rulers between user/response messages."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "635f5b8a-3c9f-4574-805e-bd6fbdfe9424",
+            "children": [
+                "ff9d383c-affe-48ef-8917-a9e88b01f3ff",
+                "012bb487-48bd-4dfa-bf9f-9e116cf96d8e",
+                "c74ff1fd-ea29-402b-9618-77f466b74e89",
+                "8deb5afb-552e-4bbc-aee5-90fd10a7210c"
+            ]
+        },
+        "ff9d383c-affe-48ef-8917-a9e88b01f3ff": {
+            "id": "ff9d383c-affe-48ef-8917-a9e88b01f3ff",
+            "message": {
+                "id": "ff9d383c-affe-48ef-8917-a9e88b01f3ff",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681448856.220289,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "I needed to update the models to parse an actual JSON object:\n\n```python\nfrom typing import Any, Dict, List, NewType, Optional\n\nfrom pydantic import BaseModel\n\n\nMetaData = NewType(\"MetaData\", Dict[str, Any])\n\n\nclass Author(BaseModel):\n    role: str\n    metadata: MetaData\n\n\nclass Content(BaseModel):\n    content_type: str\n    parts: List[str]\n\n\nclass Message(BaseModel):\n    id: str\n    author: Author\n    create_time: float\n    content: Content\n    weight: float\n    metadata: MetaData\n    recipient: str\n\n\nclass Node(BaseModel):\n    id: str\n    message: Optional[Message] = None\n    parent: Optional[str] = None\n    children: List[str]\n\n\nclass GPTChatSession(BaseModel):\n    title: str\n    create_time: float\n    update_time: float\n    mapping: Dict[str, Node]\n```\n\nPlease update `gpt_chat_session_to_md` and the test cases as needed."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "61da6d06-6a50-4364-94fa-fd94e5523718",
+            "children": [
+                "6d8293aa-609f-454e-a066-e51149185119"
+            ]
+        },
+        "6d8293aa-609f-454e-a066-e51149185119": {
+            "id": "6d8293aa-609f-454e-a066-e51149185119",
+            "message": {
+                "id": "6d8293aa-609f-454e-a066-e51149185119",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681448957.944947,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Thank you for providing the updated models. Here's the revised `gpt_chat_session_to_md` function and the test case accordingly:\n\n1. Update the `gpt_chat_session_to_md` function:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n    nodes_to_process = list(chat_session.mapping.values())\n\n    nodes_to_process.sort(key=lambda node: node.message.create_time if node.message else 0)\n\n    for node in nodes_to_process:\n        if not node.message:\n            continue\n\n        message = node.message\n\n        # Format timestamp\n        formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n\n        if message.author.role == \"user\":\n            md_output.append(f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\")\n            md_output.append(\"---\\n\")  # Add horizontal ruler\n        else:\n            md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n> {message.content.parts[0]}\\n\")\n\n    return \"\".join(md_output)\n```\n\n2. Update the test case:\n\n```python\nimport json\nfrom chattermark import GPTChatSession, gpt_chat_session_to_md\n\ndef test_gpt_chat_session_to_md():\n    chat_session_json = '''\n    {\n        \"title\": \"dev(python/chattermark): convert chat GPT sessions to markdown\",\n        \"create_time\": 1681444192.748429,\n        \"update_time\": 1681446704.0,\n        \"mapping\": {\n            \"node1\": {\n                \"id\": \"node1\",\n                \"message\": {\n                    \"id\": \"node1\",\n                    \"author\": {\n                        \"role\": \"user\",\n                        \"metadata\": {}\n                    },\n                    \"create_time\": 1681444252.398385,\n                    \"content\": {\n                        \"content_type\": \"text\",\n                        \"parts\": [\n                            \"Hello, how are you?\"\n                        ]\n                    },\n                    \"weight\": 1.0,\n                    \"metadata\": {\n                        \"timestamp_\": \"absolute\"\n                    },\n                    \"recipient\": \"all\"\n                },\n                \"children\": [\n                    \"node2\"\n                ]\n            },\n            \"node2\": {\n                \"id\": \"node2\",\n                \"message\": {\n                    \"id\": \"node2\",\n                    \"author\": {\n                        \"role\": \"assistant\",\n                        \"metadata\": {}\n                    },\n                    \"create_time\": 1681444313.495389,\n                    \"content\": {\n                        \"content_type\": \"text\",\n                        \"parts\": [\n                            \"I'm doing great! Thanks for asking.\"\n                        ]\n                    },\n                    \"end_turn\": true,\n                    \"weight\": 1.0,\n                    \"metadata\": {\n                        \"model_slug\": \"gpt-4\",\n                        \"finish_details\": {\n                            \"type\": \"stop\",\n                            \"stop\": \"\"\n                        },\n                        \"timestamp_\": \"absolute\"\n                    },\n                    \"recipient\": \"all\"\n                },\n                \"children\": []\n            }\n        }\n    }\n    '''\n    chat_session = GPTChatSession.parse_raw(chat_session_json)\n    expected_md_output = (\n        \"2023-04-13 15:30:52 - User:\\n\\n\"\n        \"Hello, how are you?\\n\"\n        \"---\\n\"\n        \"_2023-04-13 15:31:53 - Assistant:_\\n\\n\"\n        \"> I'm doing great! Thanks for asking.\\n\"\n    )\n\n    md_output = gpt_chat_session_to_md(chat_session)\n\n    assert md_output =="
+                    ]
+                },
+                "end_turn": false,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "max_tokens"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ff9d383c-affe-48ef-8917-a9e88b01f3ff",
+            "children": []
+        },
+        "012bb487-48bd-4dfa-bf9f-9e116cf96d8e": {
+            "id": "012bb487-48bd-4dfa-bf9f-9e116cf96d8e",
+            "message": {
+                "id": "012bb487-48bd-4dfa-bf9f-9e116cf96d8e",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449063.817721,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "I needed to update the models to parse an actual JSON object:\n\n```python\nfrom typing import Any, Dict, List, NewType, Optional\n\nfrom pydantic import BaseModel\n\n\nMetaData = NewType(\"MetaData\", Dict[str, Any])\n\n\nclass Author(BaseModel):\n    role: str\n    metadata: MetaData\n\n\nclass Content(BaseModel):\n    content_type: str\n    parts: List[str]\n\n\nclass Message(BaseModel):\n    id: str\n    author: Author\n    create_time: float\n    content: Content\n    weight: float\n    metadata: MetaData\n    recipient: str\n\n\nclass Node(BaseModel):\n    id: str\n    message: Optional[Message] = None\n    parent: Optional[str] = None\n    children: List[str]\n\n\nclass GPTChatSession(BaseModel):\n    title: str\n    create_time: float\n    update_time: float\n    mapping: Dict[str, Node]\n```\n\nPlease update `gpt_chat_session_to_md` and the test cases as needed. Also, add a line before and after the horizontal ruler to prevent messages from being interpreted as Markdown headers."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "61da6d06-6a50-4364-94fa-fd94e5523718",
+            "children": [
+                "edb07758-e5bb-4c14-9fe2-73e82d7152c0"
+            ]
+        },
+        "edb07758-e5bb-4c14-9fe2-73e82d7152c0": {
+            "id": "edb07758-e5bb-4c14-9fe2-73e82d7152c0",
+            "message": {
+                "id": "edb07758-e5bb-4c14-9fe2-73e82d7152c0",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449104.970092,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "I've updated the `gpt_chat_session_to_md` function based on the new `GPTChatSession` model and added lines before and after the horizontal ruler as requested:\n\n```python\nfrom datetime import datetime\nfrom typing import Optional\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n    nodes_to_process = list(chat_session.children)\n\n    while nodes_to_process:\n        node_id = nodes_to_process.pop(0)\n        node = chat_session.mapping[node_id]\n        message = node.message\n\n        if message:\n            # Format timestamp\n            formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n\n            if message.author.role == \"user\":\n                md_output.append(f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\")\n                md_output.append(\"\\n---\\n\\n\")  # Add horizontal ruler with lines before and after\n            else:\n                md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n> {message.content.parts[0]}\\n\")\n\n        nodes_to_process.extend(node.children)\n\n    return \"\".join(md_output)\n```\n\nAnd here are the updated pytest test cases for the `gpt_chat_session_to_md`"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "012bb487-48bd-4dfa-bf9f-9e116cf96d8e",
+            "children": []
+        },
+        "c74ff1fd-ea29-402b-9618-77f466b74e89": {
+            "id": "c74ff1fd-ea29-402b-9618-77f466b74e89",
+            "message": {
+                "id": "c74ff1fd-ea29-402b-9618-77f466b74e89",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449133.312137,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "I needed to update the models to parse an actual JSON object:\n\n```python\nfrom typing import Any, Dict, List, NewType, Optional\n\nfrom pydantic import BaseModel\n\n\nMetaData = NewType(\"MetaData\", Dict[str, Any])\n\n\nclass Author(BaseModel):\n    role: str\n    metadata: MetaData\n\n\nclass Content(BaseModel):\n    content_type: str\n    parts: List[str]\n\n\nclass Message(BaseModel):\n    id: str\n    author: Author\n    create_time: float\n    content: Content\n    weight: float\n    metadata: MetaData\n    recipient: str\n\n\nclass Node(BaseModel):\n    id: str\n    message: Optional[Message] = None\n    parent: Optional[str] = None\n    children: List[str]\n\n\nclass GPTChatSession(BaseModel):\n    title: str\n    create_time: float\n    update_time: float\n    mapping: Dict[str, Node]\n```\n\nPlease update `gpt_chat_session_to_md` and the test cases as needed. Also, add a line before and after the horizontal ruler to prevent messages from being interpreted as Markdown headers. Be sure to keep messages in chronological order in the Markdown output."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "61da6d06-6a50-4364-94fa-fd94e5523718",
+            "children": [
+                "da574c5c-c74f-481d-927b-681f94bb2c16"
+            ]
+        },
+        "da574c5c-c74f-481d-927b-681f94bb2c16": {
+            "id": "da574c5c-c74f-481d-927b-681f94bb2c16",
+            "message": {
+                "id": "da574c5c-c74f-481d-927b-681f94bb2c16",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449160.680723,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here's the updated `gpt_chat_session_to_md` function and test cases based on the new models:\n\n1. Update the `gpt_chat_session_to_md` function:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n    nodes_to_process = list(chat_session.children)\n\n    while nodes_to_process:\n        node_id = nodes_to_process.pop(0)\n        node = chat_session.mapping[node_id]\n        message = node.message\n\n        if message:\n            # Format timestamp\n            formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n\n            if message.author.role == \"user\":\n                md_output.append(f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\")\n                md"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "c74ff1fd-ea29-402b-9618-77f466b74e89",
+            "children": []
+        },
+        "8deb5afb-552e-4bbc-aee5-90fd10a7210c": {
+            "id": "8deb5afb-552e-4bbc-aee5-90fd10a7210c",
+            "message": {
+                "id": "8deb5afb-552e-4bbc-aee5-90fd10a7210c",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449190.919276,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "I needed to update the models to parse an actual JSON object:\n\n```python\nfrom typing import Any, Dict, List, NewType, Optional\n\nfrom pydantic import BaseModel\n\n\nMetaData = NewType(\"MetaData\", Dict[str, Any])\n\n\nclass Author(BaseModel):\n    role: str\n    metadata: MetaData\n\n\nclass Content(BaseModel):\n    content_type: str\n    parts: List[str]\n\n\nclass Message(BaseModel):\n    id: str\n    author: Author\n    create_time: float\n    content: Content\n    weight: float\n    metadata: MetaData\n    recipient: str\n\n\nclass Node(BaseModel):\n    id: str\n    message: Optional[Message] = None\n    parent: Optional[str] = None\n    children: List[str]\n\n\nclass GPTChatSession(BaseModel):\n    title: str\n    create_time: float\n    update_time: float\n    mapping: Dict[str, Node]\n```\n\nPlease update `gpt_chat_session_to_md` and the test cases as needed. Also, add a line before and after the horizontal ruler to prevent messages from being interpreted as Markdown headers. Be sure to sort messages based on creation time to ensure chronological order in the Markdown output."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "61da6d06-6a50-4364-94fa-fd94e5523718",
+            "children": [
+                "94199072-f13c-49c6-adf7-a87596be31fe"
+            ]
+        },
+        "94199072-f13c-49c6-adf7-a87596be31fe": {
+            "id": "94199072-f13c-49c6-adf7-a87596be31fe",
+            "message": {
+                "id": "94199072-f13c-49c6-adf7-a87596be31fe",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449307.854157,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here's the updated `gpt_chat_session_to_md` function based on your revised models:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n    nodes_to_process = sorted(\n        list(chat_session.mapping.values()), key=lambda node: node.message.create_time\n    )\n\n    for node in nodes_to_process:\n        message = node.message\n\n        # Format timestamp\n        formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n\n        if message.author.role == \"user\":\n            md_output.append(f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\\n\")\n            md_output.append(\"---\\n\\n\")  # Add horizontal ruler with extra lines\n        else:\n            md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n> {message.content.parts[0]}\\n\\n\")\n\n    return \"\".join(md_output)\n```\n\nThe test case has been updated accordingly:\n\n```python\nimport json\nfrom chattermark import GPTChatSession, gpt_chat_session_to_md\n\ndef test_gpt_chat_session_to_md():\n    chat_session_json = '''\n    {\n        \"title\": \"dev(python/chattermark): convert chat GPT sessions to markdown\",\n        \"create_time\": 1681444192.748429,\n        \"update_time\": 1681446704.0,\n        \"mapping\": {\n            \"node1\": {\n                \"id\": \"node1\",\n                \"message\": {\n                    \"id\": \"node1\",\n                    \"author\": {\n                        \"role\": \"user\",\n                        \"metadata\": {}\n                    },\n                    \"create_time\": 1681444252.398385,\n                    \"content\": {\n                        \"content_type\": \"text\",\n                        \"parts\": [\n                            \"Hello, how are you?\"\n                        ]\n                    },\n                    \"weight\": 1.0,\n                    \"metadata\": {\n                        \"timestamp_\": \"absolute\"\n                    },\n                    \"recipient\": \"all\"\n                },\n                \"parent\": \"root\",\n                \"children\": [\n                    \"node2\"\n                ]\n            },\n            \"node2\": {\n                \"id\": \"node2\",\n                \"message\": {\n                    \"id\": \"node2\",\n                    \"author\": {\n                        \"role\": \"assistant\",\n                        \"metadata\": {}\n                    },\n                    \"create_time\": 1681444313.495389,\n                    \"content\": {\n                        \"content_type\": \"text\",\n                        \"parts\": [\n                            \"I'm doing great! Thanks for asking.\"\n                        ]\n                    },\n                    \"end_turn\": true,\n                    \"weight\": 1.0,\n                    \"metadata\": {\n                        \"model_slug\": \"gpt-4\",\n                        \"finish_details\": {\n                            \"type\": \"stop\",\n                            \"stop\": \"\"\n                        },\n                        \"timestamp_\": \"absolute\"\n                    },\n                    \"recipient\": \"all\"\n                },\n                \"parent\": \"node1\",\n                \"children\": []\n            }\n        }\n    }\n    '''\n    chat_session = GPTChatSession.parse_raw(chat_session_json)\n    expected_md_output = (\n        \"2023-04-13 15:30:52 - User:\\n\\n\"\n        \"Hello, how are you?\\n\\n\"\n        \"---\\n\\n\"\n        \"_2023-04-13 15:31:53 - Assistant:_\\n\\n\"\n        \"> I'm doing great! Thanks for asking.\\n\\n\"\n    )\n\n    md_output = gpt_chat_session_to_md(chat_session)\n\n    assert md_output == expected_md_output\n```\n\nThe `gpt_chat_session"
+                    ]
+                },
+                "end_turn": false,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "max_tokens"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "8deb5afb-552e-4bbc-aee5-90fd10a7210c",
+            "children": [
+                "99a07644-5c88-4587-91f9-4ffd75111d1b"
+            ]
+        },
+        "99a07644-5c88-4587-91f9-4ffd75111d1b": {
+            "id": "99a07644-5c88-4587-91f9-4ffd75111d1b",
+            "message": {
+                "id": "99a07644-5c88-4587-91f9-4ffd75111d1b",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449314.408857,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "keep going"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "94199072-f13c-49c6-adf7-a87596be31fe",
+            "children": [
+                "708007b6-a58e-4d0b-b43f-9be1fbb7ed00"
+            ]
+        },
+        "708007b6-a58e-4d0b-b43f-9be1fbb7ed00": {
+            "id": "708007b6-a58e-4d0b-b43f-9be1fbb7ed00",
+            "message": {
+                "id": "708007b6-a58e-4d0b-b43f-9be1fbb7ed00",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449333.98066,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "My apologies for the incomplete response.\n\nThe `gpt_chat_session_to_md` function has been updated, and the test case has been modified based on the revised models you provided.\n\nYou can now use this updated function along with the models and test cases in your project. Ensure that you have properly set up the project with required dependencies, and run the test cases to validate the correctness of the implementation. Once the tests pass, you can use the `chattermark` CLI app to convert chat GPT sessions to markdown format.\n\nPlease let me know if you have any questions or need further assistance."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "99a07644-5c88-4587-91f9-4ffd75111d1b",
+            "children": [
+                "d287d02b-a6de-4712-b0c4-48812158dca7"
+            ]
+        },
+        "d287d02b-a6de-4712-b0c4-48812158dca7": {
+            "id": "d287d02b-a6de-4712-b0c4-48812158dca7",
+            "message": {
+                "id": "d287d02b-a6de-4712-b0c4-48812158dca7",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449335.146027,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "AttributeError: 'NoneType' object has no attribute 'create_time'"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "708007b6-a58e-4d0b-b43f-9be1fbb7ed00",
+            "children": [
+                "e139cc45-58a2-4732-b304-a3807cfa72a4"
+            ]
+        },
+        "e139cc45-58a2-4732-b304-a3807cfa72a4": {
+            "id": "e139cc45-58a2-4732-b304-a3807cfa72a4",
+            "message": {
+                "id": "e139cc45-58a2-4732-b304-a3807cfa72a4",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449380.203323,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Apologies for the oversight. It seems there might be cases where the `message` attribute in the `Node` model is `None`. In this case, we should skip processing the node. Here's the updated `gpt_chat_session_to_md` function to handle this case:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n    nodes_to_process = sorted(\n        [node for node in chat_session.mapping.values() if node.message is not None],\n        key=lambda node: node.message.create_time\n    )\n\n    for node in nodes_to_process:\n        message = node.message\n\n        # Format timestamp\n        formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n\n        if message.author.role == \"user\":\n            md_output.append(f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\\n\")\n            md_output.append(\"---\\n\\n\")  # Add horizontal ruler with extra lines\n        else:\n            md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n> {message.content.parts[0]}\\n\\n\")\n\n    return \"\".join(md_output)\n```\n\nNow the function will only process nodes with a valid `message` attribute, and it should not raise an `AttributeError` related to 'NoneType' objects. Please run the test cases again and let me know if you face any issues or need further assistance."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "d287d02b-a6de-4712-b0c4-48812158dca7",
+            "children": [
+                "7ca4823d-eb8b-410e-af7a-3ab028588d8b",
+                "ea467f65-ef02-4e98-9a46-3d399945dfbb"
+            ]
+        },
+        "7ca4823d-eb8b-410e-af7a-3ab028588d8b": {
+            "id": "7ca4823d-eb8b-410e-af7a-3ab028588d8b",
+            "message": {
+                "id": "7ca4823d-eb8b-410e-af7a-3ab028588d8b",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449620.621559,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Update `gpt_chat_session_to_md` to skip both `user` and `assistant` messages in cases where the `assistant` message is interrupted."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "e139cc45-58a2-4732-b304-a3807cfa72a4",
+            "children": [
+                "46db820d-dd40-435b-abfe-e12e6d7b7c4b"
+            ]
+        },
+        "46db820d-dd40-435b-abfe-e12e6d7b7c4b": {
+            "id": "46db820d-dd40-435b-abfe-e12e6d7b7c4b",
+            "message": {
+                "id": "46db820d-dd40-435b-abfe-e12e6d7b7c4b",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449660.188474,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To skip both `user` and `assistant` messages in cases where the `assistant` message is interrupted, we need to identify the interrupted messages first. One way to do this is to check for the existence of an `interrupt` key in the `message.metadata` dictionary.\n\nHere's the updated `gpt_chat_session_to_md` function that skips messages when the `assistant` message is interrupted:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n    nodes_to_process = sorted(\n        [node for node in chat_session.mapping.values() if node.message is not None],\n        key=lambda node: node.message.create_time\n    )\n\n    skip_next_user_message = False\n\n    for node in nodes_to_process:\n        message = node.message\n\n        # Check for interrupted assistant message\n        if message.author.role == \"assistant\" and message.metadata.get(\"interrupt\"):\n            skip_next_user_message = True\n            continue\n\n        if skip_next_user_message and message.author.role == \"user\":\n            skip_next_user_message = False\n            continue\n\n        # Format timestamp\n        formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "7ca4823d-eb8b-410e-af7a-3ab028588d8b",
+            "children": []
+        },
+        "ea467f65-ef02-4e98-9a46-3d399945dfbb": {
+            "id": "ea467f65-ef02-4e98-9a46-3d399945dfbb",
+            "message": {
+                "id": "ea467f65-ef02-4e98-9a46-3d399945dfbb",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449701.064508,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Update `gpt_chat_session_to_md` to skip `assistant` messages in cases where the `assistant` message is interrupted, but also skip the `user` message immediately preceding the interrupted message."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "e139cc45-58a2-4732-b304-a3807cfa72a4",
+            "children": [
+                "ac6ddc6d-d423-4e3c-aecb-22b55b551af4"
+            ]
+        },
+        "ac6ddc6d-d423-4e3c-aecb-22b55b551af4": {
+            "id": "ac6ddc6d-d423-4e3c-aecb-22b55b551af4",
+            "message": {
+                "id": "ac6ddc6d-d423-4e3c-aecb-22b55b551af4",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449759.022904,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "To skip `assistant` messages in cases where the `assistant` message is interrupted and also skip the `user` message immediately preceding the interrupted message, you can update the `gpt_chat_session_to_md` function as follows:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n\n    nodes_to_process = sorted(\n        [node for node in chat_session.mapping.values() if node.message is not None],\n        key=lambda node: node.message.create_time\n    )\n\n    skip_next_user = False\n    for node in nodes_to_process:\n        message = node.message\n\n        if message.author.role == \"assistant\":\n            if \"interrupted\" in message.metadata:\n                skip_next_user = True\n                continue  # Skip interrupted assistant message\n            else:\n                # Format timestamp\n                formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n                md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n> {message.content.parts[0]}\\n\\n\")\n\n        elif message.author.role == \"user\":\n            if skip_next_user:\n                skip_next_user = False  # Reset flag and skip the user message preceding the interrupted message\n            else:\n                # Format timestamp\n                formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n                md_output.append(f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\\n\")\n                md_output.append(\"---\\n\\n\")  # Add horizontal ruler with extra lines\n\n    return \"\".join(md_output)\n```\n\nThis updated function will now skip the `assistant` messages with the \"interrupted\" flag in their metadata and the `user` messages immediately preceding them. Please run the test cases again to ensure the correct behavior. Let me know if you need any further assistance or have any questions."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ea467f65-ef02-4e98-9a46-3d399945dfbb",
+            "children": [
+                "41708aaf-8217-4119-b07c-bad84c753674"
+            ]
+        },
+        "41708aaf-8217-4119-b07c-bad84c753674": {
+            "id": "41708aaf-8217-4119-b07c-bad84c753674",
+            "message": {
+                "id": "41708aaf-8217-4119-b07c-bad84c753674",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681449789.189764,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "This does not look quite right; I think this skips the _next_ user message, NOT the preceding one."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ac6ddc6d-d423-4e3c-aecb-22b55b551af4",
+            "children": [
+                "99f7ee0e-54eb-4ebc-8d17-8ea9e1580464"
+            ]
+        },
+        "99f7ee0e-54eb-4ebc-8d17-8ea9e1580464": {
+            "id": "99f7ee0e-54eb-4ebc-8d17-8ea9e1580464",
+            "message": {
+                "id": "99f7ee0e-54eb-4ebc-8d17-8ea9e1580464",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681449850.03972,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "You're correct, my previous implementation skipped the next user message, not the preceding one. Here's the corrected implementation that skips the immediately preceding user message when an interrupted assistant message is encountered:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n\n    nodes_to_process = sorted(\n        [node for node in chat_session.mapping.values() if node.message is not None],\n        key=lambda node: node.message.create_time\n    )\n\n    previous_user_output = \"\"\n    for node in nodes_to_process:\n        message = node.message\n\n        if message.author.role == \"assistant\":\n            if \"interrupted\" in message.metadata:\n                previous_user_output = \"\"  # Discard the previous user message\n                continue  # Skip interrupted assistant message\n            else:\n                # Append the previous user message\n                md_output.append(previous_user_output)\n                previous_user_output = \"\"  # Reset the previous user message\n\n                # Format timestamp\n                formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n                md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n> {message.content.parts[0]}\\n\\n\")\n\n        elif message.author.role == \"user\":\n            # Format timestamp\n            formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n            previous_user_output = f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\\n---\\n\\n\"\n\n    return \"\".join(md_output)\n```\n\nNow, the function stores the user message in `previous_user_output`. When an interrupted assistant message is encountered, it discards the preceding user message by resetting `previous_user_output`. If there's no interrupted assistant message, the user message is added to the output.\n\nPlease run the test cases again to ensure the correct behavior. Let me know if you need any further assistance or have any questions."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "41708aaf-8217-4119-b07c-bad84c753674",
+            "children": [
+                "71d16c99-8386-48cb-b790-62e1b2bcb808"
+            ]
+        },
+        "71d16c99-8386-48cb-b790-62e1b2bcb808": {
+            "id": "71d16c99-8386-48cb-b790-62e1b2bcb808",
+            "message": {
+                "id": "71d16c99-8386-48cb-b790-62e1b2bcb808",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681450174.12863,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "I found two issues:\n1. Horizontal ruler should be after each _assistant_ message; NOT each _user_ message.\n2. The block quote format should be applied to _all_ lines in the _assistant_ message, NOT just the first line."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "99f7ee0e-54eb-4ebc-8d17-8ea9e1580464",
+            "children": [
+                "ae72b58a-7f11-4e94-9f22-ec3d3ced0031"
+            ]
+        },
+        "ae72b58a-7f11-4e94-9f22-ec3d3ced0031": {
+            "id": "ae72b58a-7f11-4e94-9f22-ec3d3ced0031",
+            "message": {
+                "id": "ae72b58a-7f11-4e94-9f22-ec3d3ced0031",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681450234.546031,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Thank you for pointing out the issues. Here's the updated `gpt_chat_session_to_md` function that addresses these concerns:\n\n```python\nfrom datetime import datetime\n\ndef gpt_chat_session_to_md(chat_session: GPTChatSession) -> str:\n    md_output = []\n\n    nodes_to_process = sorted(\n        [node for node in chat_session.mapping.values() if node.message is not None],\n        key=lambda node: node.message.create_time\n    )\n\n    previous_user_output = \"\"\n    for node in nodes_to_process:\n        message = node.message\n\n        if message.author.role == \"assistant\":\n            if \"interrupted\" in message.metadata:\n                previous_user_output = \"\"  # Discard the previous user message\n                continue  # Skip interrupted assistant message\n            else:\n                # Append the previous user message\n                md_output.append(previous_user_output)\n                previous_user_output = \"\"  # Reset the previous user message\n\n                # Format timestamp\n                formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n\n                # Apply block quote formatting to all lines of the assistant message\n                block_quoted_content = \"> \" + \"\\n> \".join(message.content.parts[0].splitlines())\n\n                md_output.append(f\"_**{formatted_timestamp} - Assistant:**_\\n\\n{block_quoted_content}\\n\\n---\\n\\n\")\n\n        elif message.author.role == \"user\":\n            # Format timestamp\n            formatted_timestamp = datetime.fromtimestamp(message.create_time).strftime(\"%Y-%m-%d %H:%M:%S\")\n            previous_user_output = f\"**{formatted_timestamp} - User:**\\n\\n{message.content.parts[0]}\\n\\n\"\n\n    return \"\".join(md_output)\n```\n\nNow, the horizontal ruler is placed after each assistant message, and the block quote format is applied to all lines in the assistant message, not just the first line.\n\nPlease run the test cases again to ensure the correct behavior. Let me know if you need any further assistance or have any questions."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "71d16c99-8386-48cb-b790-62e1b2bcb808",
+            "children": [
+                "cc276562-740b-4c64-a887-fbb1c50349f1",
+                "982ffeb2-ceda-4af2-827a-dbad2c155c86",
+                "471ec1c4-f878-4c72-aa97-8eb48ba3b94e",
+                "9390ad47-afc5-4814-99c3-32664de1c5d1",
+                "a12f7be8-7f1d-4979-a147-f1409376b39d"
+            ]
+        },
+        "cc276562-740b-4c64-a887-fbb1c50349f1": {
+            "id": "cc276562-740b-4c64-a887-fbb1c50349f1",
+            "message": {
+                "id": "cc276562-740b-4c64-a887-fbb1c50349f1",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681450383.918522,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please update the README based on the latest code."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ae72b58a-7f11-4e94-9f22-ec3d3ced0031",
+            "children": [
+                "b25e9eaa-dfc4-4bcd-a532-28dcb31c6b8d"
+            ]
+        },
+        "b25e9eaa-dfc4-4bcd-a532-28dcb31c6b8d": {
+            "id": "b25e9eaa-dfc4-4bcd-a532-28dcb31c6b8d",
+            "message": {
+                "id": "b25e9eaa-dfc4-4bcd-a532-28dcb31c6b8d",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681450387.496688,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here's the updated README.md for the Chattermark project:\n\n```markdown\n# Chattermark"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "cc276562-740b-4c64-a887-fbb1c50349f1",
+            "children": []
+        },
+        "982ffeb2-ceda-4af2-827a-dbad2c155c86": {
+            "id": "982ffeb2-ceda-4af2-827a-dbad2c155c86",
+            "message": {
+                "id": "982ffeb2-ceda-4af2-827a-dbad2c155c86",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681450406.076666,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please update the README based on the latest code and include the section on Pandoc."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ae72b58a-7f11-4e94-9f22-ec3d3ced0031",
+            "children": [
+                "9c5167f5-cb53-4874-bc29-5f852d7fe338"
+            ]
+        },
+        "9c5167f5-cb53-4874-bc29-5f852d7fe338": {
+            "id": "9c5167f5-cb53-4874-bc29-5f852d7fe338",
+            "message": {
+                "id": "9c5167f5-cb53-4874-bc29-5f852d7fe338",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681450424.818791,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "# ChatterMark 🗨️📝✨\n\nChatterMark is a command-line tool to convert GPT chat sessions in JSON format to well-formatted Markdown files. It is useful for reviewing, sharing, or transforming GPT chat sessions into other formats, such as HTML or Word documents.\n\n## Installation\n\nInstall ChatterMark using pip:\n\n```bash\npip install chattermark\n```\n\n## Usage\n\nTo convert a GPT chat session JSON file to a Markdown file, use the following command:\n\n```bash\nchattermark input.json output.md\n```\n\nReplace `input.json` with the path to your GPT"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "982ffeb2-ceda-4af2-827a-dbad2c155c86",
+            "children": []
+        },
+        "471ec1c4-f878-4c72-aa97-8eb48ba3b94e": {
+            "id": "471ec1c4-f878-4c72-aa97-8eb48ba3b94e",
+            "message": {
+                "id": "471ec1c4-f878-4c72-aa97-8eb48ba3b94e",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681450433.976008,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please update the README in the same style as the original based on the latest code and include the section on Pandoc."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ae72b58a-7f11-4e94-9f22-ec3d3ced0031",
+            "children": [
+                "e5a4c41d-537e-42f3-80e7-ece07b8f9fc5"
+            ]
+        },
+        "e5a4c41d-537e-42f3-80e7-ece07b8f9fc5": {
+            "id": "e5a4c41d-537e-42f3-80e7-ece07b8f9fc5",
+            "message": {
+                "id": "e5a4c41d-537e-42f3-80e7-ece07b8f9fc5",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681450449.515601,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here's the updated README for the `chattermark` project:\n\n```\n# Chattermark 🗨️📝✨\n\nChattermark is a command-line tool that converts GPT chat sessions in JSON format, as extracted from a Chrome browser session using the developer tools, to human-readable Markdown format.\n\n## Installation\n\nInstall the package using pip:\n\n```\npip install chattermark\n```\n\n## Usage\n\n```\nchattermark [OPTIONS] INPUT_FILE OUTPUT_FILE\n```\n\n- `INPUT_FILE`: Path to the JSON file containing the"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "471ec1c4-f878-4c72-aa97-8eb48ba3b94e",
+            "children": []
+        },
+        "9390ad47-afc5-4814-99c3-32664de1c5d1": {
+            "id": "9390ad47-afc5-4814-99c3-32664de1c5d1",
+            "message": {
+                "id": "9390ad47-afc5-4814-99c3-32664de1c5d1",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681450476.623644,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please update the fun README as the original based on the latest code and include the section on Pandoc."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ae72b58a-7f11-4e94-9f22-ec3d3ced0031",
+            "children": [
+                "780b0fd1-094a-45c8-94b4-b9bdf53a1738"
+            ]
+        },
+        "780b0fd1-094a-45c8-94b4-b9bdf53a1738": {
+            "id": "780b0fd1-094a-45c8-94b4-b9bdf53a1738",
+            "message": {
+                "id": "780b0fd1-094a-45c8-94b4-b9bdf53a1738",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681450480.01236,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Here's an updated fun README for the ChatterMark app, including the section on Pandoc:\n\n```\n# Ch"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "interrupted"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "9390ad47-afc5-4814-99c3-32664de1c5d1",
+            "children": []
+        },
+        "a12f7be8-7f1d-4979-a147-f1409376b39d": {
+            "id": "a12f7be8-7f1d-4979-a147-f1409376b39d",
+            "message": {
+                "id": "a12f7be8-7f1d-4979-a147-f1409376b39d",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681450500.224337,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Please update the fun README accounting for the latest code and include the section on Pandoc."
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "ae72b58a-7f11-4e94-9f22-ec3d3ced0031",
+            "children": [
+                "b405e0c8-e605-4bf1-9aa9-df3177eda847"
+            ]
+        },
+        "b405e0c8-e605-4bf1-9aa9-df3177eda847": {
+            "id": "b405e0c8-e605-4bf1-9aa9-df3177eda847",
+            "message": {
+                "id": "b405e0c8-e605-4bf1-9aa9-df3177eda847",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681450596.723012,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "# Chattermark 📝💬✨\n\nChattermark is a CLI tool that converts GPT chat sessions to a Markdown format, making it easier for you to read, share, or archive your chat sessions. It parses JSON data extracted from a GPT chat session and generates a neat and well-formatted Markdown file.\n\n## Installation\n\n```bash\npip install chattermark\n```\n\n## Usage\n\n```bash\nchattermark input.json output.md\n```\n\n### Input\n\nYour input should be a JSON file containing a chat session with a GPT model. The JSON structure should match the `GPTChatSession` Pydantic model in the code.\n\n### Output\n\nChattermark will generate a Markdown file with a chronological and easy-to-read representation of the chat session. The output will show user and assistant messages, along with timestamps.\n\n## Example\n\nSuppose you have the following JSON data in a file called `input.json`:\n\n```json\n{\n    \"title\": \"dev(python/chattermark): convert chat GPT sessions to markdown\",\n    \"create_time\": 1681444192.748429,\n    \"update_time\": 1681446704.0,\n    \"mapping\": {\n        ...\n    }\n}\n```\n\nRun Chattermark:\n\n```bash\nchattermark input.json output.md\n```\n\nThe generated `output.md` will look like this:\n\n```\n**2023-04-13 15:30:52 - User:**\n\nPlease define a pydantic model for a json representation of a chat GPT session as extracted from a Chrome browser session using the developer tools.\n\n_**2023-04-13 15:31:53 - Assistant:**_\n\n> To create a Pydantic model for a JSON representation of a chat GPT session extracted from a Chrome browser session using the developer tools, you'll first need to identify the data structure and fields in the JSON. ...\n\n---\n\n...\n```\n\n## Converting Markdown to Other Formats\n\nChattermark generates a Markdown output, which is a versatile and widely supported format. However, you might want to convert the Markdown output to other formats like Word documents, HTML, or PDF. To do this, you can use a tool called [Pandoc](https://pandoc.org/).\n\n1. Install Pandoc following the [official installation guide](https://pandoc.org/installing.html).\n2. Run Pandoc to convert the Markdown file to your desired format. For example:\n\n   - To convert the Markdown file to an HTML file:\n\n     ```bash\n     pandoc output.md -o output.html\n     ```\n\n   - To convert the Markdown file to a Word document:\n\n     ```bash\n     pandoc output.md -o output.docx\n     ```\n\n   - To convert the Markdown file to a PDF file:\n\n     ```bash\n     pandoc output.md -o output.pdf\n     ```\n\nCheck the [Pandoc User's Guide](https://pandoc.org/MANUAL.html) for more information on available output formats and options.\n\n## Contributing\n\nFeel free to open issues or submit pull requests to improve Chattermark. Contributions are welcome!\n\n## License\n\nChattermark is released under the MIT License."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "a12f7be8-7f1d-4979-a147-f1409376b39d",
+            "children": [
+                "133caf84-cb64-4c43-9690-1b1fb4678c06"
+            ]
+        },
+        "133caf84-cb64-4c43-9690-1b1fb4678c06": {
+            "id": "133caf84-cb64-4c43-9690-1b1fb4678c06",
+            "message": {
+                "id": "133caf84-cb64-4c43-9690-1b1fb4678c06",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681451092.304822,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Write a git commit message for all code changes since a `create_time` of 1681448248.157656"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "b405e0c8-e605-4bf1-9aa9-df3177eda847",
+            "children": [
+                "63b08551-b9e7-472b-ab1a-075113d6bb8e"
+            ]
+        },
+        "63b08551-b9e7-472b-ab1a-075113d6bb8e": {
+            "id": "63b08551-b9e7-472b-ab1a-075113d6bb8e",
+            "message": {
+                "id": "63b08551-b9e7-472b-ab1a-075113d6bb8e",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681451120.150362,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "feat: Add Chattermark CLI and updated GPTChatSession model\n\nThis commit introduces several enhancements and bug fixes:\n\n- Update the GPTChatSession Pydantic model to accurately parse JSON chat sessions\n- Implement gpt_chat_session_to_md function to convert GPTChatSession instances to Markdown format\n  - Show messages in chronological order\n  - Format assistant responses as block quotes\n  - Add horizontal ruler after each assistant message\n  - Skip interrupted assistant messages and their preceding user messages\n- Add Typer CLI app for command-line usage\n- Include test cases for gpt_chat_session_to_md\n- Configure the project as a Poetry package with pre-commit hooks\n- Use setuptools_scm for package versioning\n- Add fun README file with usage examples and Pandoc conversion guide\n- Set up entry point for running Chattermark with `chattermark ...` command"
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "133caf84-cb64-4c43-9690-1b1fb4678c06",
+            "children": [
+                "967a896d-1b15-4395-b2ce-a0f29031ac17"
+            ]
+        },
+        "967a896d-1b15-4395-b2ce-a0f29031ac17": {
+            "id": "967a896d-1b15-4395-b2ce-a0f29031ac17",
+            "message": {
+                "id": "967a896d-1b15-4395-b2ce-a0f29031ac17",
+                "author": {
+                    "role": "user",
+                    "metadata": {}
+                },
+                "create_time": 1681451215.940797,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Specifically regarding \"Update the GPTChatSession Pydantic model to accurately parse JSON chat sessions\" generate a commit message of the form:\n\n```\nPrior to this commit, ...\n\nIn this commit, ...\n```"
+                    ]
+                },
+                "weight": 1.0,
+                "metadata": {
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "63b08551-b9e7-472b-ab1a-075113d6bb8e",
+            "children": [
+                "60e5f929-4b7e-427f-b8bd-d33f7d7634c6"
+            ]
+        },
+        "60e5f929-4b7e-427f-b8bd-d33f7d7634c6": {
+            "id": "60e5f929-4b7e-427f-b8bd-d33f7d7634c6",
+            "message": {
+                "id": "60e5f929-4b7e-427f-b8bd-d33f7d7634c6",
+                "author": {
+                    "role": "assistant",
+                    "metadata": {}
+                },
+                "create_time": 1681451232.857982,
+                "content": {
+                    "content_type": "text",
+                    "parts": [
+                        "Prior to this commit, the GPTChatSession Pydantic model was not properly defined to accurately parse JSON chat sessions extracted from a browser, resulting in incorrect deserialization and potential errors.\n\nIn this commit, the GPTChatSession Pydantic model is updated with new classes and fields to accurately represent the JSON chat session structure, allowing for successful deserialization and further processing of chat data."
+                    ]
+                },
+                "end_turn": true,
+                "weight": 1.0,
+                "metadata": {
+                    "model_slug": "gpt-4",
+                    "finish_details": {
+                        "type": "stop",
+                        "stop": "<|diff_marker|>"
+                    },
+                    "timestamp_": "absolute"
+                },
+                "recipient": "all"
+            },
+            "parent": "967a896d-1b15-4395-b2ce-a0f29031ac17",
             "children": []
         }
     },
     "moderation_results": [],
-    "current_node": "a67db67d-aa24-4c3c-acec-9aeda1c81f56"
+    "current_node": "60e5f929-4b7e-427f-b8bd-d33f7d7634c6"
 }
